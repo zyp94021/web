@@ -1,9 +1,4 @@
-const path = require('path')
-const nodeExternals = require('webpack-node-externals')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const merge = require('webpack-merge')
 const resolve = {
   extensions: ['.js', '.jsx'],
 }
@@ -45,36 +40,4 @@ const baseConfig = {
     ],
   },
 }
-const clientConfig = merge(baseConfig, {
-  entry: './entry/client',
-  devtool: 'inline-source-map',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, '../public'),
-  },
-  plugins: [
-    new ManifestPlugin(),
-    new HtmlWebpackPlugin({
-      templateParameters: {
-        server: false,
-        title: 'client',
-      },
-      template: './template/index.pug',
-    }),
-    new ExtractTextPlugin('[name].css'),
-  ],
-})
-
-const serverConfig = merge(baseConfig, {
-  target: 'node',
-  entry: './entry/server',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, '../build'),
-    libraryTarget: 'commonjs',
-  },
-  externals: [nodeExternals()],
-  plugins: [new ManifestPlugin(), new ExtractTextPlugin('[name].css')],
-})
-
-module.exports = [clientConfig, serverConfig]
+module.exports = baseConfig

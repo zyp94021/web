@@ -4,7 +4,7 @@ class Page1 extends React.Component {
   render() {
     return (
       <div className="red">
-        page1 <span>span</span>
+        page1 <span>span2</span>
       </div>
     )
   }
