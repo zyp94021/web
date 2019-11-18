@@ -5,6 +5,8 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     title #{title}
+    if server
+      link( rel="stylesheet" href="./main.css")
   body 
     div(id="app")
       if server 
@@ -13,5 +15,3 @@ html(lang="en")
       script.
         window.__STATE__ = JSON.parse(!{state})
       script(src="./bundle.js")
-
-

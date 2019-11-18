@@ -1,8 +1,15 @@
 import path from 'path'
 import pug from 'pug'
-export const renderTemplate = data => {
+import App from '../build/bundle.js'
+import { renderToString } from 'react-dom/server'
+export const renderTemplate = ({ request, state }) => {
   const htmlTpl = pug.compileFile(
     path.resolve(__dirname, '../template/index.pug')
   )
-  return htmlTpl({ ...data, server: true, title: 'server' })
+  return htmlTpl({
+    server: true,
+    title: 'server',
+    state,
+    html: renderToString(App.default(request, state)),
+  })
 }

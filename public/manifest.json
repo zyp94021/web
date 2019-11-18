@@ -1,4 +1,5 @@
 {
   "main.js": "bundle.js",
+  "main.css": "main.css",
   "index.html": "index.html"
 }

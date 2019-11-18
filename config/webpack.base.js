@@ -2,6 +2,7 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
 const resolve = {
   extensions: ['.js', '.jsx'],
@@ -18,8 +19,11 @@ const baseConfig = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(css|less)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'less-loader'],
+        }),
       },
       {
         test: /\.pug$/,
@@ -27,9 +31,19 @@ const baseConfig = {
           loader: 'pug-loader',
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
-  plugins: [new ManifestPlugin()],
 }
 const clientConfig = merge(baseConfig, {
   entry: './entry/client',
@@ -47,6 +61,7 @@ const clientConfig = merge(baseConfig, {
       },
       template: './template/index.pug',
     }),
+    new ExtractTextPlugin('[name].css'),
   ],
 })
 
@@ -59,6 +74,7 @@ const serverConfig = merge(baseConfig, {
     libraryTarget: 'commonjs',
   },
   externals: [nodeExternals()],
+  plugins: [new ManifestPlugin(), new ExtractTextPlugin('[name].css')],
 })
 
 module.exports = [clientConfig, serverConfig]
