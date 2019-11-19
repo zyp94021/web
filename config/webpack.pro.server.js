@@ -6,17 +6,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 
-const serverConfig = merge(baseConfig, {
-  target: 'node',
-  entry: './entry/server',
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '../ssrbuild'),
-    libraryTarget: 'commonjs',
-  },
-  externals: [nodeExternals()],
-  plugins: [new CleanWebpackPlugin(), new ExtractTextPlugin('[name].css')],
-})
+// const serverConfig = merge(baseConfig, {
+//   target: 'node',
+//   entry: './entry/server',
+//   output: {
+//     filename: '[name].js',
+//     path: path.resolve(__dirname, '../ssrbuild'),
+//     libraryTarget: 'commonjs',
+//   },
+//   externals: [nodeExternals()],
+//   plugins: [new CleanWebpackPlugin(), new ExtractTextPlugin('[name].css')],
+// })
 const publicConfig = merge(baseConfig, {
   entry: './entry/client',
   output: {
@@ -30,4 +30,4 @@ const publicConfig = merge(baseConfig, {
   ],
 })
 
-module.exports = [serverConfig, publicConfig]
+module.exports = [publicConfig]
