@@ -3,6 +3,7 @@
 项目结构
 
 ```
+├─ asset                    资源目录
 ├─ build                    ts 代码输出目录
 ├─ client                   客户端代码目录
 ├─ clientbuild              前端babel编译输出目录(去除服务器不能识别的文件,供服务器直接引用)
@@ -60,4 +61,4 @@ SSR     yarn build:server
 4. autoprefixer
 ```
 
-继续更新...
+未完...
