@@ -25,7 +25,7 @@ export const renderTemplate = ({ request, state }) => {
   return htmlTpl({
     server: true,
     title: 'server',
-    state,
+    state: `'${JSON.stringify(state)}'`,
     // html: renderToString(App.default(request, state)),
     html: renderToString(render(request, state)),
   })

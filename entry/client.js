@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { hot } from 'react-hot-loader/root'
 import Router from '../client/Router'
 import createStore from '../client/store'
-const initState = window.__STATE__ || { title: 'client' }
+const initState = window.__STATE__
 const store = createStore(initState)
 const App = () => (
   <Provider store={store}>

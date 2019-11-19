@@ -59,6 +59,7 @@ SSR     yarn build:server
 2. SSR
 3. less
 4. autoprefixer
+5. redux 前后端数据联通
 ```
 
 未完...
