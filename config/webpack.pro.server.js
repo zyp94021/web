@@ -1,8 +1,8 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 
@@ -11,11 +11,23 @@ const serverConfig = merge(baseConfig, {
   entry: './entry/server',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../ssrbuild'),
     libraryTarget: 'commonjs',
   },
   externals: [nodeExternals()],
-  plugins: [new ManifestPlugin(), new ExtractTextPlugin('[name].css')],
+  plugins: [new CleanWebpackPlugin(), new ExtractTextPlugin('[name].css')],
+})
+const publicConfig = merge(baseConfig, {
+  entry: './entry/client',
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, '../public'),
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new ManifestPlugin(),
+    new ExtractTextPlugin('[name].css'),
+  ],
 })
 
-module.exports = serverConfig
+module.exports = [serverConfig, publicConfig]

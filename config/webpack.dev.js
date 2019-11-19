@@ -10,10 +10,10 @@ module.exports = {
   devtool: 'inline-source-map',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../dev'),
+    path: path.resolve(__dirname, '../dist'),
   },
   devServer: {
-    contentBase: '../dev',
+    contentBase: '../dist',
     hot: true,
   },
   resolve,

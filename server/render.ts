@@ -1,6 +1,6 @@
 import path from 'path'
 import pug from 'pug'
-import App from '../build/bundle.js'
+import App from '../ssrbuild/main.js'
 import { renderToString } from 'react-dom/server'
 export const renderTemplate = ({ request, state }) => {
   const htmlTpl = pug.compileFile(

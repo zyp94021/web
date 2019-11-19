@@ -1,13 +1,13 @@
 {
   "scripts": {
-    "start": "rm -rf ./dist/* && tsc && pm2 start ./dist/index.js",
-    "stop": "pm2 stop ./dist/index.js",
-    "restart": "rm -rf ./dist/* && tsc && pm2 restart ./dist/index.js",
-    "serve": "serve public -s",
+    "start": "rm -rf ./build/* && tsc && pm2 start ./build/index.js",
+    "stop": "pm2 stop ./build/index.js",
+    "restart": "rm -rf ./build/* && tsc && pm2 restart ./build/index.js",
+    "serve": "serve dist -s",
     "build:client": "webpack --config config/webpack.pro.client.js --mode=production",
     "build:server": "webpack --config config/webpack.pro.server.js --mode=production",
     "dev": "webpack-dev-server --config config/webpack.dev.js --open",
-    "runnode": "rm -rf ./dist/* && tsc && node ./dist/index.js"
+    "runnode": "rm -rf ./build/* && tsc && node ./build/index.js"
   },
   "dependencies": {
     "@koa/multer": "^2.0.0",

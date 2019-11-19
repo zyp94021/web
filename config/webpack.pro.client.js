@@ -7,10 +7,9 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 const clientConfig = merge(baseConfig, {
   entry: './entry/client',
-  devtool: 'inline-source-map',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../public'),
+    path: path.resolve(__dirname, '../dist'),
   },
   plugins: [
     new ManifestPlugin(),
