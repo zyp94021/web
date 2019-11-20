@@ -1,13 +1,13 @@
 {
   "scripts": {
-    "start": "yarn run:babel && rm -rf ./build/* && tsc && pm2 start ./build/index.js",
+    "start": "rm -rf ./build/* && tsc && pm2 start ./build/index.js",
     "stop": "pm2 stop ./build/index.js",
-    "restart": "yarn run:babel && rm -rf ./build/* && tsc && pm2 restart ./build/index.js",
+    "restart": "rm -rf ./build/* && tsc && pm2 restart ./build/index.js",
     "serve": "serve dist -s",
-    "build:client": "webpack --config config/webpack.pro.client.js --mode=production",
-    "build:server": "webpack --config config/webpack.pro.server.js --mode=production",
+    "build:client": "webpack --config config/webpack.client.js --mode=production",
+    "build:server": "webpack --config config/webpack.server.js --mode=production",
     "dev": "webpack-dev-server --config config/webpack.dev.js --open",
-    "run:node": "yarn run:babel && rm -rf ./build/* && tsc && node ./build/index.js",
+    "run:node": "rm -rf ./build/* && tsc && node ./build/index.js",
     "run:babel": "rm -rf ./clientbuild/* && cross-env TYPE=client babel client --out-dir clientbuild"
   },
   "dependencies": {

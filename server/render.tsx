@@ -2,25 +2,25 @@ import path from 'path'
 import pug from 'pug'
 // import App from '../ssrbuild/main.js'
 import { renderToString } from 'react-dom/server'
-import React from 'react'
-import { Provider } from 'react-redux'
-import { StaticRouter } from 'react-router-dom'
-import Router from '../clientbuild/Router'
-import createStore from '../clientbuild/store'
+// import React from 'react'
+// import { Provider } from 'react-redux'
+// import { StaticRouter } from 'react-router-dom'
+// import Router from '../clientbuild/Router'
+// import createStore from '../clientbuild/store'
 const manifest = require('../public/manifest.json')
 const testJs = key => /\.js$/.test(key)
 const testCss = key => /\.css$/.test(key)
-const testImg = key => /\.(png|jpg|gif)$/.test(key)
-const render = (req, initState) => {
-  const store = createStore(initState)
-  return (
-    <Provider store={store}>
-      <StaticRouter location={req.url}>
-        <Router />
-      </StaticRouter>
-    </Provider>
-  )
-}
+// const render = (req, initState) => {
+//   const store = createStore(initState)
+//   return (
+//     <Provider store={store}>
+//       <StaticRouter location={req.url}>
+//         <Router />
+//       </StaticRouter>
+//     </Provider>
+//   )
+// }
+const render = require('../ssrbuild/main').default
 
 export const renderTemplate = ({ request, state }) => {
   const htmlTpl = pug.compileFile(

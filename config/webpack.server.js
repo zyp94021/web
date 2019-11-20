@@ -5,19 +5,25 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 const merge = require('webpack-merge')
+const nodeExternals = require('webpack-node-externals')
 const baseConfig = require('./webpack.base')
 
-// const serverConfig = merge(baseConfig, {
-//   target: 'node',
-//   entry: './entry/server',
-//   output: {
-//     filename: '[name].js',
-//     path: path.resolve(__dirname, '../ssrbuild'),
-//     libraryTarget: 'commonjs',
-//   },
-//   externals: [nodeExternals()],
-//   plugins: [new CleanWebpackPlugin(), new ExtractTextPlugin('[name].css')],
-// })
+const serverConfig = merge(baseConfig, {
+  target: 'node',
+  entry: './entry/server',
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, '../ssrbuild'),
+    libraryTarget: 'commonjs',
+  },
+  externals: [nodeExternals()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+  ],
+})
 const publicConfig = merge(baseConfig, {
   entry: ['@babel/polyfill', './entry/client'],
   output: {
@@ -34,4 +40,4 @@ const publicConfig = merge(baseConfig, {
   ],
 })
 
-module.exports = publicConfig
+module.exports = [publicConfig, serverConfig]

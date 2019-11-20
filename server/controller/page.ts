@@ -1,6 +1,7 @@
 import { renderTemplate } from '../render'
 import Router from 'koa-router'
-import routerConfig from '../../clientbuild/router.config'
+// import routerConfig from '../../clientbuild/router.config'
+const routerConfig = [{ path: '/page1' }, { path: '/page2' }]
 import data from '../data'
 const page = new Router()
 routerConfig.forEach(router => {

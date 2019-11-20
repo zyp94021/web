@@ -1,10 +1,10 @@
 import React from 'react'
-import '../../asset/angel.jpg'
+import angel from '../../asset/angel.jpg'
 class Page2 extends React.Component {
   render() {
     return (
       <div>
-        <img src="/asset/angel.jpg"></img>
+        <img src={angel}></img>
       </div>
     )
   }
