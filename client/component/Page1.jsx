@@ -5,6 +5,14 @@ class Page1 extends React.Component {
   constructor(props) {
     super(props)
   }
+  async componentDidMount() {
+    console.time('sleep3')
+    await this.sleep(5)
+    console.timeEnd('sleep3')
+  }
+  sleep(sec) {
+    return new Promise(resolve => setTimeout(resolve, sec * 1000))
+  }
   render() {
     return (
       <div className="red">

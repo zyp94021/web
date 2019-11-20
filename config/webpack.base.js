@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const resolve = {
   extensions: ['.js', '.jsx'],
 }
@@ -15,10 +15,12 @@ const baseConfig = {
       },
       {
         test: /\.(css|less)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'less-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.pug$/,
@@ -38,6 +40,22 @@ const baseConfig = {
         ],
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      automaticNameDelimiter: '-',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
 }
 module.exports = baseConfig

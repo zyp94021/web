@@ -6,7 +6,7 @@ const resolve = {
   extensions: ['.js', '.jsx'],
 }
 module.exports = {
-  entry: './entry/client',
+  entry: ['@babel/polyfill', './entry/client'],
   devtool: 'inline-source-map',
   output: {
     filename: '[name].js',
@@ -14,6 +14,7 @@ module.exports = {
   },
   devServer: {
     contentBase: '../dist',
+    historyApiFallback: true,
     hot: true,
   },
   resolve,
@@ -50,7 +51,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       templateParameters: {
         server: false,

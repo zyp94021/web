@@ -1,7 +1,6 @@
 import React from 'react'
 import '../../asset/angel.jpg'
 class Page2 extends React.Component {
-  
   render() {
     return (
       <div>

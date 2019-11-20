@@ -1,8 +1,9 @@
 const path = require('path')
-const nodeExternals = require('webpack-node-externals')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 
@@ -18,16 +19,19 @@ const baseConfig = require('./webpack.base')
 //   plugins: [new CleanWebpackPlugin(), new ExtractTextPlugin('[name].css')],
 // })
 const publicConfig = merge(baseConfig, {
-  entry: './entry/client',
+  entry: ['@babel/polyfill', './entry/client'],
   output: {
-    filename: '[name].js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, '../public'),
   },
   plugins: [
     new CleanWebpackPlugin(),
     new ManifestPlugin(),
-    new ExtractTextPlugin('[name].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    new BundleAnalyzerPlugin(),
   ],
 })
 
-module.exports = [publicConfig]
+module.exports = publicConfig

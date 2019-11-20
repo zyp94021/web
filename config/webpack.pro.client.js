@@ -1,17 +1,20 @@
 const path = require('path')
-const nodeExternals = require('webpack-node-externals')
-const ManifestPlugin = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
+const ManifestPlugin = require('webpack-manifest-plugin')
 const baseConfig = require('./webpack.base')
 const clientConfig = merge(baseConfig, {
-  entry: './entry/client',
+  entry: ['@babel/polyfill', './entry/client'],
   output: {
-    filename: '[name].js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, '../dist'),
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new ManifestPlugin(),
     new HtmlWebpackPlugin({
       templateParameters: {
@@ -20,7 +23,10 @@ const clientConfig = merge(baseConfig, {
       },
       template: './template/index.pug',
     }),
-    new ExtractTextPlugin('[name].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    new BundleAnalyzerPlugin(),
   ],
 })
 
