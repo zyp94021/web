@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import './Layout.less'
 class Layout extends React.Component {
   constructor(props) {
     super(props)

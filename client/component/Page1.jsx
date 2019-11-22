@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.less'
 import { connect } from 'react-redux'
+import Text from './Text'
 class Page1 extends React.Component {
   constructor(props) {
     super(props)
@@ -15,8 +16,12 @@ class Page1 extends React.Component {
   }
   render() {
     return (
-      <div className="red">
-        page1 <span>{this.props.message}</span>
+      <div className="page1">
+        page1
+        <br />
+        <span className="red">{this.props.message}</span>
+        <br />
+        <Text />
       </div>
     )
   }
