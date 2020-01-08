@@ -1,19 +1,13 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const resolve = {
   extensions: ['.js', '.jsx'],
 }
 module.exports = {
   entry: ['@babel/polyfill', './entry/client'],
   devtool: 'inline-source-map',
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '../dist'),
-  },
   devServer: {
-    contentBase: '../dist',
+    contentBase: path.resolve(__dirname, '../public'),
     historyApiFallback: true,
     hot: true,
   },
@@ -37,24 +31,13 @@ module.exports = {
           loader: 'pug-loader',
         },
       },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-            },
-          },
-        ],
-      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       templateParameters: {
         server: false,
-        title: 'client',
+        title: 'development',
       },
       template: './template/index.pug',
     }),

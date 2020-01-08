@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 const ManifestPlugin = require('webpack-manifest-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const baseConfig = require('./webpack.base')
 const clientConfig = merge(baseConfig, {
   entry: ['@babel/polyfill', './entry/client'],
@@ -26,6 +27,7 @@ const clientConfig = merge(baseConfig, {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
+    new CopyPlugin([{ from: 'public', to: '' }]),
     new BundleAnalyzerPlugin(),
   ],
 })
