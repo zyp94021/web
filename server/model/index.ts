@@ -9,7 +9,6 @@ const sequelize = new Sequelize('mysql://root:123456@localhost/web', {
     collate: 'utf8_general_ci',
   },
   pool: {
-    // logging: true,
     max: 800,
     min: 0,
     idle: 10000,

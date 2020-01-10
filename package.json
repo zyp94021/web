@@ -1,12 +1,14 @@
 {
   "scripts": {
+    "test": "jest",
     "dev": "webpack-dev-server --config config/webpack.dev.js --open",
     "build:client": "webpack --config config/webpack.client.js --mode=production",
+    "api":"ts-node server/index.ts",
     "serve": "serve dist -s",
     "build:server": "webpack --config config/webpack.server.js --mode=production",
-    "start": "yarn babel:server && pm2 start ./build/index.js",
+    "start": "tsc && pm2 start ./build/index.js",
     "stop": "pm2 stop ./build/index.js",
-    "restart": "yarn babel:server && pm2 restart ./build/index.js",
+    "restart": "tsc && pm2 restart ./build/index.js",
     "run:node": "yarn babel:server && node ./build/index.js",
     "babel:client": "rm -rf ./clientbuild/* && cross-env TYPE=client babel client --out-dir clientbuild",
     "babel:server": "rm -rf ./build/* && cross-env TYPE=server babel server --out-dir build"
@@ -39,6 +41,8 @@
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
+    "@babel/preset-typescript": "^7.7.7",
+    "@types/jest": "^24.0.25",
     "@types/koa": "^2.0.52",
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-router": "^7.0.42",
@@ -60,6 +64,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
